@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wiidisc version="1">
+  <id game="RMCP01" />
+  <options>
+    <section name="Hop test">
+      <option name="Hop damping">
+        <choice name="Stock">
+        </choice>
+        <choice name="Halved">
+          <patch id="HopTest" />
+        </choice>
+      </option>
+    </section>
+  </options>
+  <patch id="HopTest">
+    <!--
+      0x80891A4C is a float in StaticR.rel data. Stock value is 0.998.
+      Kart::Movement::UpdateHopPhysics (0x80579968) multiplies the vertical
+      velocity by it every frame. 0.5f = 0x3F000000.
+    -->
+    <memory offset="0x80891A4C" value="3F000000" />
+  </patch>
+</wiidisc>
